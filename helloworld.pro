@@ -67,12 +67,12 @@ word(pistola,  p,i,s,t,o,l,a).
 word(statale,  s,t,a,t,a,l,e).
 
 crossword(A,B,C,D,E,F):-
-    word(A, A1, A2, A3, A4, A5, A6, A7),
-    word(B, B1, B2, B3, B4, B5, B6, B7),
-    word(C, C1, C2, C3, C4, C5, C6, C7),
-    word(D, D1, A2, D2, B2, D3, C2, D4),
-    word(E, E1, A4, E2, B4, E3, C4, E4),
-    word(F, F1, A6, F2, B6, F3, C6, F4),
+    word(A, _, A2, _, A4, _, A6, _),
+    word(B, _, B2, _, B4, _, B6, _),
+    word(C, _, C2, _, C4, _, C6, _),
+    word(D, _, A2, _, B2, _, C2, _),
+    word(E, _, A4, _, B4, _, C4, _),
+    word(F, _, A6, _, B6, _, C6, _),
     A \= D,
     B \= E,
     C \= F.
@@ -190,6 +190,6 @@ travel(From, To, Route):-
     (byTrain(From, To), Route = goByTrainn(From, To));
     (byPlane(From, To), Route = goByPlane(From, To)).
 travel(From, To, Route):-
-    (byCar(From, Via), travel(Via, To, NewRoute),Route = goByCar(From, Via, NewRoute));
-    (byTrain(From, Via), travel(Via, To, NewRoute),Route = goByTrain(From, Via, NewRoute));
-    (byPlane(From, Via), travel(Via, To, NewRoute),Route = goByPlane(From, Via, NewRoute)).
+    (byCar(From, Via), travel(Via, To, NewRoute), Route = goByCar(From, Via, NewRoute));
+    (byTrain(From, Via), travel(Via, To, NewRoute), Route = goByTrain(From, Via, NewRoute));
+    (byPlane(From, Via), travel(Via, To, NewRoute), Route = goByPlane(From, Via, NewRoute)).
