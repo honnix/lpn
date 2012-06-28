@@ -120,3 +120,76 @@ swap(A, B):- A = leaf(X), B = leaf(X).
 swap(A, B):-
     A = tree(La, Ra), B = tree(Lb, Rb),
     swap(La, Rb), swap(Ra, Lb).
+
+connected(1, 2).
+connected(3, 4).
+connected(5, 6).
+connected(7, 8).
+connected(9, 10).
+connected(12, 13).
+connected(13, 14).
+connected(15, 16).
+connected(17, 18).
+connected(19, 20).
+connected(4, 1).
+connected(6, 3).
+connected(4, 7).
+connected(6, 11).
+connected(14, 9).
+connected(11, 15).
+connected(16, 12).
+connected(14, 17).
+connected(16, 19).
+
+path(From, To):- connected(From, To).
+path(From, To):-
+    connected(From, Via),
+    path(Via, To).
+
+byCar(auckland, hamilton).
+byCar(hamilton, raglan).
+byCar(valmont, saarbruecken).
+byCar(valmont, metz).
+
+byTrain(metz, frankfurt).
+byTrain(saarbruecken, frankfurt).
+byTrain(metz, paris).
+byTrain(saarbruecken, paris).
+
+byPlane(frankfurt, bangkok).
+byPlane(frankfurt, singapore).
+byPlane(paris, losAngeles).
+byPlane(bangkok, auckland).
+byPlane(singapore, auckland).
+byPlane(losAngeles, auckland).
+
+travel(From, To):-
+    byCar(From, To);
+    byTrain(From, To);
+    byPlane(From, To).
+travel(From, To):-
+    (byCar(From, Via);
+    byTrain(From, Via);
+    byPlane(From, Via)),
+    travel(Via, To).
+
+%% travel(From, To, Route):-
+%%     (byCar(From, To);
+%%     byTrain(From, To);
+%%     byPlane(From, To)),
+%%     Route = go(From, To).
+%% travel(From, To, Route):-
+%%     (byCar(From, Via);
+%%     byTrain(From, Via);
+%%     byPlane(From, Via)),
+%%     travel(Via, To, NewRoute),
+%%     Route = go(From, Via, NewRoute).
+
+travel(From, To, Route):-
+    (byCar(From, To), Route = goByCar(From, To));
+    (byTrain(From, To), Route = goByTrainn(From, To));
+    (byPlane(From, To), Route = goByPlane(From, To)).
+travel(From, To, Route):-
+    (byCar(From, Via), travel(Via, To, NewRoute),Route = goByCar(From, Via, NewRoute));
+    (byTrain(From, Via), travel(Via, To, NewRoute),Route = goByTrain(From, Via, NewRoute));
+    (byPlane(From, Via), travel(Via, To, NewRoute),Route = goByPlane(From, Via, NewRoute)).
