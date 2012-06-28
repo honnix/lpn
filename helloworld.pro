@@ -193,3 +193,39 @@ travel(From, To, Route):-
     (byCar(From, Via), travel(Via, To, NewRoute), Route = goByCar(From, Via, NewRoute));
     (byTrain(From, Via), travel(Via, To, NewRoute), Route = goByTrain(From, Via, NewRoute));
     (byPlane(From, Via), travel(Via, To, NewRoute), Route = goByPlane(From, Via, NewRoute)).
+
+member1(X, [X|_]).
+member1(X, [_|T]):- member1(X, T).
+
+a2b([], []).
+a2b([a | Ta], [b | Tb]):- a2b(Ta, Tb).
+
+second(X, [_, X | _]).
+
+swap12([], []).
+swap12([X | T1], [X | T2]):- swap12(T1, T2).
+
+tran(eins, one).
+tran(zwei, two).
+tran(drei, three).
+tran(vier, four).
+tran(fuenf, five).
+tran(sechs, six).
+tran(sieben, seven).
+tran(acht, eight).
+tran(neun, nine).
+
+listtran([], []).
+listtran([H1 | T1], [H2 | T2]):- tran(H1, H2), listtran(T1, T2).
+
+twice([], []).
+twice([H | T1], [H, H | T2]):- twice(T1, T2).
+
+combine([], [], []).
+combine([H1 | T1], [H2 | T2], [H1, H2 | T3]):- combine(T1, T2, T3).
+
+combine2([], [], []).
+combine2([H1 | T1], [H2 | T2], [[H1, H2] | T3]):- combine2(T1, T2, T3).
+
+combine3([], [], []).
+combine3([H1 | T1], [H2 | T2], [j(H1, H2) | T3]):- combine3(T1, T2, T3).
