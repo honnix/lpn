@@ -229,3 +229,33 @@ combine2([H1 | T1], [H2 | T2], [[H1, H2] | T3]):- combine2(T1, T2, T3).
 
 combine3([], [], []).
 combine3([H1 | T1], [H2 | T2], [j(H1, H2) | T3]):- combine3(T1, T2, T3).
+
+len([], 0).
+len([_ | T], N):- len(T, X), N is X + 1.
+
+accLen([_ | T], A, N):- Anew is A + 1, accLen(T, Anew, N).
+accLen([], A, A).
+
+accMax([H | T], A, Max):-
+    H > A,
+    accMax(T, H, Max).
+accMax([H | T], A, Max):-
+    H =< A,
+    accMax(T, A, Max).
+accMax([], A, A).
+
+max([H | T], Max):-
+    accMax(T, H, Max).
+
+increment(X, Y):- Y > X + 1.
+
+sum(X, Y, S):- S =:= X + Y.
+
+addone([], []).
+addone([H1 | T1], [H2 | T2]):- H2 is H1 + 1, addone(T1, T2).
+
+scalarMult(_, [], []).
+scalarMult(N, [H1 | T1], [H2 | T2]):- H2 is H1 * N, scalarMult(N, T1, T2).
+
+dot([], [], 0).
+dot([H1 | T1], [H2 | T2], Result):- dot(T1, T2, NewResult), Result is NewResult + H1 * H2.
