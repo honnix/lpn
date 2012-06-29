@@ -290,3 +290,63 @@ set([H | T], X):- set(T, Y), X = [H | Y].
 %% flatten([], F).
 %% flatten([[H | X] | T], F):- flatten([H | T], F1), flatten(X, F2), append(F1, F2, F).
 %% flatten([H | T], F):- flatten(T, [H | F]).
+
+det([the]).
+det([a]).
+n([woman]).
+n([man]).
+v([shoots]).
+
+s(Z):- np(X), vp(Y), append(X, Y, Z).
+np(Z):- det(X), n(Y), append(X, Y, Z).
+vp(Z):- v(X), np(Y), append(X, Y, Z).
+vp(Z):- v(Z).
+
+det([the | W], W).
+det([a | W], W).
+n([woman | W], W).
+n([man | W], W).
+v([shoots | W], W).
+
+%% s(X, Z):- np(X, Y), vp(Y, Z).
+%% np(X, Z):- det(X, Y), n(Y, Z).
+%% vp(X, Z):- v(X, Y), np(Y, Z).
+%% vp(X, Z):- v(X, Z).
+
+s --> simple_s.
+s --> simple_s, conj, s.
+simple_s --> np, vp.
+np --> det, n.
+vp --> v, np.
+vp --> v.
+det --> [the].
+det --> [a].
+n --> [woman].
+n --> [man].
+v --> [shoots].
+conj --> [and].
+conj --> [or].
+conj --> [but].
+
+s --> [].
+s --> l, s, r.
+l --> [a].
+r --> [b].
+
+s --> foo, bar, wiggle.
+foo --> [choo].
+foo --> foo, foo.
+bar --> mar, zar.
+mar --> me, my.
+me --> [i].
+my --> [am].
+zar --> blar, car.
+blar --> [a].
+car --> [train].
+wiggle --> [toot].
+wiggle --> wiggle, wiggle.
+
+s1 --> l, r.
+s1 --> l, s1, r.
+l --> [a].
+r --> [b].
