@@ -259,3 +259,34 @@ scalarMult(N, [H1 | T1], [H2 | T2]):- H2 is H1 * N, scalarMult(N, T1, T2).
 
 dot([], [], 0).
 dot([H1 | T1], [H2 | T2], Result):- dot(T1, T2, NewResult), Result is NewResult + H1 * H2.
+
+prefix(P, L):- append(P, _, L).
+suffix(S, L):- append(_, S, L).
+sublist(SubL, L):- suffix(S, L), prefix(SubL, S).
+
+naiverev([], []).
+naiverev([H | T], R):- naiverev(T, RevT), append(RevT, [H], R).
+
+accRev([H | T], A, R):- accRev(T, [H | A], R).
+accRev([], A, A).
+rev(L, R):- accRev(L, [], R).
+
+doubled(L):- append(X, X, L).
+
+palindrome(L):- rev(L, L).
+
+toptail([_ | T], X):- rev(T, [_ | R]), rev(R, X).
+
+last(L, X):- rev(L, [X | _]).
+last1([X | []], X).
+last1([_ | T], X):- last1(T, X).
+
+member2(X, L):- append(_, [X | _], L).
+
+set([], []).
+set([H | T], X):- set(T, Y), member2(H, Y), X = Y.
+set([H | T], X):- set(T, Y), X = [H | Y].
+
+%% flatten([], F).
+%% flatten([[H | X] | T], F):- flatten([H | T], F1), flatten(X, F2), append(F1, F2, F).
+%% flatten([H | T], F):- flatten(T, [H | F]).
