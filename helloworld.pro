@@ -359,3 +359,61 @@ r2 --> [b].
 s3 --> [].
 s3 --> l3, l3, s3.
 l3 --> [s].
+
+s --> np(subject), vp.
+np(_) --> det, n.
+np(X) --> pro(X).
+vp --> v, np(object).
+vp --> v.
+det --> [the].
+det --> [a].
+n --> [woman].
+n --> [man].
+pro(subject) --> [he].
+pro(subject) --> [she].
+pro(object) --> [him].
+pro(object) --> [her].
+v --> [shoots].
+
+s4(Count) --> ablock(Count), bblock(Count), cblock(Count).
+ablock(0) --> [].
+ablock(NewCount) --> [a], ablock(Count),
+                     {NewCount is Count + 1}.
+bblock(0) --> [].
+bblock(NewCount) --> [b], bblock(Count),
+                        {NewCount is Count + 1}.
+cblock(0) --> [].
+cblock(NewCount) --> [c], cblock(Count),
+                        {NewCount is Count + 1}.
+
+lex(the, det).
+lex(a, det).
+lex(woman, n).
+lex(man, n).
+lex(shoots, v).
+
+s --> np, vp.
+np --> det, n.
+vp --> v, np.
+vp --> v.
+det --> [Word], {lex(Word, det)}.
+n --> [Word], {lex(Word, n)}.
+v --> [Word], {lex(Word, v)}.
+
+s --> np(single), vp(single).
+s --> np(pl), vp(pl).
+np(X) --> det(X), n(X).
+vp(X) -->  v(X), np(X).
+vp(X) -->  v(X).
+det(single) -->  [a].
+det(_) -->  [the].
+
+n(_) --> [apple].
+n(_) --> [pear].
+n(single) --> [woman].
+n(single) --> [man].
+n(pl) --> [women].
+n(pl) --> [men].
+
+v(pl) --> [eat].
+v(single) --> [eats].
