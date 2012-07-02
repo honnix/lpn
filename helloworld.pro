@@ -346,7 +346,16 @@ car --> [train].
 wiggle --> [toot].
 wiggle --> wiggle, wiggle.
 
-s1 --> l, r.
-s1 --> l, s1, r.
-l --> [a].
-r --> [b].
+s1 --> l1, r1.
+s1 --> l1, s1, r1.
+l1 --> [a].
+r1 --> [b].
+
+s2 --> l2, r2, r2.
+s2 --> l2, s2, r2, r2.
+l2 --> [a].
+r2 --> [b].
+
+s3 --> [].
+s3 --> l3, l3, s3.
+l3 --> [s].
