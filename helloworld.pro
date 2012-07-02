@@ -428,3 +428,39 @@ groundtermlist([H | T]):- nonvar(H), groundtermlist(T).
 :- op(300, fx, likes).
 :- op(200, xfy, and).
 :- op(100, fy, famous).
+
+s(X, Y):- q(X, Y).
+s(0, 0).
+q(X, Y):- i(X), !, j(Y).
+i(1).
+i(2).
+j(1).
+j(2).
+j(3).
+
+max(X, Y, Y):- X =< Y, !.
+max(X, Y, X):- X > Y.
+
+neg(Goal):- Goal, !, fail.
+neg(Goal).
+
+p(1).
+p(2):- !.
+p(3).
+
+
+class(Number, positive):- Number > 0, !.
+class(0, zero):- !.
+class(Number, negative):- Number < 0.
+
+split([], [], []).
+split([H | T], P, N):- H < 0, split(T, P1, N1), P = P1, N = [H | N1], !.
+split([H | T], P, N):- H >= 0, split(T, P1, N1), P = [H | P1], N = N1.
+
+q(blob, blug).
+q(blob, blag).
+q(blob, blig).
+q(blaf, blag).
+q(dang, dong).
+q(dang, blug).
+q(flab, blob).
