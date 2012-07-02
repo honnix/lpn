@@ -73,9 +73,9 @@ crossword(A,B,C,D,E,F):-
     word(D, _, A2, _, B2, _, C2, _),
     word(E, _, A4, _, B4, _, C4, _),
     word(F, _, A6, _, B6, _, C6, _),
-    A \= D,
-    B \= E,
-    C \= F.
+    A \== D,
+    B \== E,
+    C \== F.
 
 just_ate(mosquito, blood(john)).
 just_ate(frog, mosquito).
@@ -417,3 +417,14 @@ n(pl) --> [men].
 
 v(pl) --> [eat].
 v(single) --> [eats].
+
+termtype(X, T):- (atom(X), T = atom); (number(X), T = number); (atomic(X), T = atomic).
+
+groundterm(X):- nonvar(X), X =.. Y, groundtermlist(Y).
+groundtermlist([]).
+groundtermlist([H | T]):- nonvar(H), groundtermlist(T).
+
+:- op(300, xfx, [are, is_a]).
+:- op(300, fx, likes).
+:- op(200, xfy, and).
+:- op(100, fy, famous).
