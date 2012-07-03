@@ -16,7 +16,7 @@ curtain(Clock, Sensor):- eighteen_till_twentythree(Clock);
                          twentythree_till_seven(Clock);
                          lte_five(Sensor).
 
-get_time(Clock):- Clock is 2400.
+get_time(Clock):- Clock is 2315.
 get_sensor(Sensor):- Sensor is 10.
 
 good_to_sleep:- get_time(Clock), get_sensor(Sensor), \+ light(Clock, Sensor), curtain(Clock, Sensor).
