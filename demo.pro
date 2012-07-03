@@ -3,7 +3,7 @@
 :- use_module(library(codesio), [read_from_codes/2]).
 
 eighteen_till_twentythree(Clock):- Clock >= 1800, Clock =< 2259.
-twentythree_till_seven(Clock):- (Clock >= 2300, Clock =< 2400);
+twentythree_till_seven(Clock):- (Clock >= 2300, Clock =< 2359);
                                 (Clock >= 0, Clock =< 659).
 seven_till_eighteen(Clock):- Clock >= 700, Clock =< 1759.
 
