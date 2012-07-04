@@ -464,3 +464,9 @@ q(blaf, blag).
 q(dang, dong).
 q(dang, blug).
 q(flab, blob).
+
+hanoi(s(0), A, B, C, [[A, B]]).
+hanoi(s(N), A, B, C, Moves):-
+    hanoi(N, A, C, B, Ms1),
+    hanoi(N, C, B, A, Ms2),
+    append(Ms1, [[A, B] | Ms2], Moves).
